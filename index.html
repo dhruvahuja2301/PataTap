@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PataTap</title>
+	<link rel="stylesheet" type="text/css" href="circles.css">
+	<script type="text/javascript" src = "paper-full.min.js"></script>
+
+	<!-- Define inlined PaperScript associate it with myCanvas -->
+	<script type="text/paperscript" canvas="myCanvas">
+		// console.log(view.size.width,view.size.height);
+		var circles =[];
+		var circleSize = 200; 
+		function onKeyDown(event) {
+			// var size = new Point(circleSize,circleSize);
+				var maxPoint = new Point(view.size.width,view.size.height);
+			// var maxPoint = new Point(view.size.width-(2*circleSize),view.size.height-(2*circleSize));
+			var point = new (Point.random()*maxPoint);
+			// var point = new (Point.random()*maxPoint)+size;
+			var circle = new Path.Circle(point, circleSize);
+			circle.fillColor = 'yellow';
+			circles.push(circle);
+		}
+
+		function onFrame(event) {
+		// Each frame, change the fill color of the path slightly by
+		// adding 1 to its hue:
+			for(var i =0 ;i<circles.length;i++) {
+				circles[i].fillColor.hue += 1;
+				circles[i].scale(0.95);
+			}
+		}	
+
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+
+</body>
+</html>
