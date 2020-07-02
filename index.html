@@ -196,6 +196,14 @@
 			}
 			
 		}
+
+		function onMouseDown(event) {
+				var circle = new Path.Circle(event.point, circleSize);
+				circle.fillColor = generateColor();
+				keyData[generateAlpha()].sound.play();
+				circles.push(circle);
+
+		}
 		function generateAlpha() {
 			var  num = Math.floor(Math.random() * 26)+97;
 			return String.fromCharCode(num);
@@ -212,13 +220,18 @@
 			for(var i =0 ;i<circles.length;i++) {
 				circles[i].fillColor.hue += 1;
 				circles[i].scale(0.95);
+				if(circles[i].area<1){
+					circles[i].remove() // remove the circle from canvas
+					circles.shift();
+					console.log(circles);
+				}
 			}
 		}	
 
 	</script>
 </head>
 <body>
-	<canvas id="myCanvas" resize></canvas>
+	<canvas id="myCanvas" resize>	</canvas>
 
 </body>
 </html>
